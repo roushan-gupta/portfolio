@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(30deg);
+            animation: headerShine 6s infinite linear;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            animation: fadeInDown 1s ease forwards;
+            opacity: 0;
+        }
+
+        header p {
+            animation: fadeInUp 1s ease 0.5s forwards;
+            opacity: 0;
+        }
+
+        /* About Section */
+        .about {
+            padding: 3rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            background: #fff;
+            border-radius: 10px;
+            margin-top: -2rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            opacity: 0;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+            padding: 3rem 1rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .project-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(52, 152, 219, 0.2), transparent);
+            transition: all 0.5s;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            opacity: 0;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            color: #f1c40f;
+            transform: translateY(-5px) rotate(5deg);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes headerShine {
+            0% {
+                transform: rotate(30deg) translateX(-100%);
+            }
+            100% {
+                transform: rotate(30deg) translateX(100%);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll Animation Trigger */
+        .animate-on-scroll {
+            opacity: 0;
+        }
+
+        .animated {
+            animation: slideIn 0.8s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="profile.jpg" alt="Profile Picture" class="profile-img">
+        <h1>Roushan Kumar</h1>
+        <p>Web Developer & Designer</p>
+    </header>
+
+    <section class="about animate-on-scroll">
+        <h2>About Me</h2>
+        <p>Roushan Kumar is a passionate and dedicated Master of Computer Applications (MCA) student at CUSAT (Cochin University of Science and Technology). With a strong background in computer science, he completed his graduation from Veer Kunwar Singh University, Ara.
+
+            Roushan has a keen interest in web development and is currently working on a Virtual Study Room project, which focuses on real-time collaboration for students. He is always eager to explore new technologies and improve his coding skills.
+            
+            Apart from academics, Roushan enjoys playing chess, which sharpens his problem-solving and strategic thinking abilities. Though he is a bit shy and doesn’t talk much, he enjoys spending time with his friends. He is also working on improving his English to enhance his communication skills.
+            
+            Originally from Mohania, Bihar, Roushan is an ambitious and hardworking individual who strives to excel in his field. 🚀.</p>
+    </section>
+
+    <section class="projects">
+        <h2 style="text-align: center; margin-bottom: 2rem;">My Projects</h2>
+        <div class="project-grid">
+            <div class="project-card animate-on-scroll">
+                <img src="myntra.jpg" alt="Project 1">
+                <h3>Project 1</h3>
+                <p>Myntra Clone – Online Fashion Store
+                    Project Overview
+                    The Myntra Clone is a web-based e-commerce platform that replicates the core functionalities of Myntra, a leading fashion and lifestyle shopping website. This project allows users to browse a variety of fashion products, add them to their cart, and make purchases seamlessly.
+                    
+                    Features
+                    User Module
+                    User authentication (Sign Up, Login, Logout)
+                    
+                    Profile management (Address, Order History)
+                    
+                    Wishlist functionality
+                    
+                    Product Module
+                    Display of fashion products (Clothes, Footwear, Accessories, etc.)
+                    
+                    Filtering and sorting (by category, price, brand, etc.)
+                    
+                    Product details page with images and descriptions
+                    
+                    Cart & Checkout
+                    Add/remove products from the cart
+                    
+                    Order summary and checkout process
+                    
+                    Payment integration (Razorpay, Stripe, or dummy payment gateway)
+                    
+                    Admin Panel
+                    Add, update, and delete products
+                    
+                    Manage orders and users
+                    
+                    View sales analytics
+                    
+                    Technology Stack
+                    Frontend: React.js / Next.js, Tailwind CSS
+                    
+                    Backend: Node.js, Express.js
+                    
+                    Database: MongoDB / MySQL
+                    
+                    Authentication: Firebase/Auth0/JWT
+                    
+                    Hosting: Vercel (Frontend), AWS/Render (Backend).</p>
+            </div>
+            <div class="project-card animate-on-scroll">
+                <img src="study.jpg" alt="Project 2">
+                <h3>Project 2</h3>
+                <p>Online Study Platform – Virtual Study Room
+                    Project Overview
+                    The Online Study Platform is a web-based real-time collaborative study environment where students can connect, share resources, and study together. The platform allows users to create virtual study rooms, collaborate on notes, chat in real-time, and enhance their learning experience through interactive features.
+                    
+                    Features
+                    User Module
+                    User authentication (Sign Up, Login, Logout)
+                    
+                    Profile management (Name, Bio, Subjects of Interest)
+                    
+                    Join or create study rooms
+                    
+                    Study Rooms
+                    Real-time collaboration using WebSockets
+                    
+                    Shared whiteboard for brainstorming
+                    
+                    Live text editor for collaborative note-taking
+                    
+                    File sharing (PDFs, images, notes)
+                    
+                    Communication & Engagement
+                    Real-time chat (text/audio/video)
+                    
+                    Discussion forums for Q&A
+                    
+                    Scheduled study sessions with reminders
+                    
+                    Admin Panel
+                    Manage users and study rooms
+                    
+                    Monitor active sessions
+                    
+                    Content moderation tools
+                    
+                    Technology Stack
+                    Frontend: React.js / Next.js, Tailwind CSS
+                    
+                    Backend: Node.js, Express.js
+                    
+                    Database: Firebase / MongoDB
+                    
+                    Real-Time Features: WebSockets, Socket.io
+                    
+                    Authentication: Firebase/Auth0/JWT
+                    
+                    Hosting: Vercel (Frontend), AWS/Render (Backend).</p>
+            </div>
+            <div class="project-card animate-on-scroll">
+                <img src="code.jpg" alt="Project 3">
+                <h3>Project 3</h3>
+                <p>Online Coding Platform – CodeHub
+                    Project Overview
+                    The Online Coding Platform is a web-based application that allows users to write, compile, and execute code in multiple programming languages. It provides a real-time coding environment with collaboration features, making it ideal for coding practice, interviews, and hackathons.
+                    
+                    Features
+                    User Module
+                    User authentication (Sign Up, Login, Logout)
+                    
+                    Profile management (Username, Bio, Saved Codes)
+                    
+                    Code Editor
+                    Online code editor with syntax highlighting
+                    
+                    Support for multiple programming languages (Python, C++, Java, JavaScript, etc.)
+                    
+                    Auto-save and code history
+                    
+                    Execution & Debugging
+                    Real-time code execution with input/output console
+                    
+                    Error handling and debugging assistance
+                    
+                    Code execution timeout for performance optimization
+                    
+                    Collaboration Features
+                    Real-time coding with multiple users (pair programming)
+                    
+                    Live chat for discussions
+                    
+                    Code sharing via unique links
+                    
+                    Challenges & Learning
+                    Predefined coding challenges for practice
+                    
+                    AI-based code suggestions and improvements
+                    
+                    Leaderboard and achievements
+                    
+                    Admin Panel
+                    User management
+                    
+                    Challenge creation and moderation
+                    
+                    Code execution monitoring
+                    
+                    Technology Stack
+                    Frontend: React.js / Next.js, Tailwind CSS, Monaco Editor (VS Code-like editor)
+                    
+                    Backend: Node.js, Express.js
+                    
+                    Database: Firebase / MongoDB
+                    
+                    Compiler API: Judge0 / JDoodle API
+                    
+                    Real-Time Collaboration: WebSockets, Socket.io
+                    
+                    Authentication: Firebase/Auth0/JWT
+                    
+                    Hosting: Vercel (Frontend), AWS/Render (Backend)</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="animate-on-scroll">
+        <h3>Contact Me</h3>
+        <p>Email: roushankumar.mohania@gmail.com</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/roushangupta11/">LinkedIn</a>
+            <a href="https://github.com/roushan-gupta">GitHub</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animation observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
